@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>videojs-koment Demo</title>
+    <link href="/node_modules/video.js/dist/video-js.css" rel="stylesheet">
+    <style>
+
+        button {
+            margin: 1em;
+            width: 10em;
+        }
+
+        .autoadvance-group {
+            margin: 1em;
+        }
+
+        .autoadvance-group label {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<video class="video-js vjs-default-skin" controls width="640px" height="360px" crossorigin>
+    <!--<track src="http://afr-api-v1-staging.herokuapp.com/api/videos/c1ee3b32-0bf8-4873-b173-09dc055b7bfe/koment"-->
+    <!--kind="koment" srclang="fr" label="English">-->
+</video>
+<ul>
+    <li><a href="/test/">Run unit tests in browser.</a></li>
+</ul>
+<script src="/node_modules/video.js/dist/video.js"></script>
+<script src="/dist/videojs-koment.js"></script>
+<script>
+
+    var player = videojs(document.querySelector('video'), {});
+
+    try {
+        // try on ios
+        player.volume(0);
+    } catch (e) {
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "videojs-koment",
+  "version": "1.2.0",
+  "author": "Afrostream, Inc. @benjipott",
+  "license": "Apache-2.0",
+  "main": [
+    "dist/videojs-koment.min.js"
+  ],
+  "keywords": [
+    "videojs",
+    "videojs-plugin"
+  ]
+}
+

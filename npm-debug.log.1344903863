@@ -1,0 +1,30 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/benjipott/.nvm/versions/node/v4.5.0/bin/node',
+1 verbose cli   '/Users/benjipott/.nvm/versions/node/v4.5.0/bin/npm',
+1 verbose cli   'run-script',
+1 verbose cli   'mkdirs' ]
+2 info using npm@3.10.7
+3 info using node@v4.5.0
+4 verbose run-script [ 'premkdirs', 'mkdirs', 'postmkdirs' ]
+5 info lifecycle videojs-comments@1.0.0~premkdirs: videojs-comments@1.0.0
+6 silly lifecycle videojs-comments@1.0.0~premkdirs: no script for premkdirs, continuing
+7 info lifecycle videojs-comments@1.0.0~mkdirs: videojs-comments@1.0.0
+8 verbose lifecycle videojs-comments@1.0.0~mkdirs: unsafe-perm in lifecycle true
+9 verbose lifecycle videojs-comments@1.0.0~mkdirs: PATH: /Users/benjipott/.nvm/versions/node/v4.5.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/benjipott/Documents/projects/afrostream/videojs-comments/node_modules/.bin:/Users/benjipott/.nvm/versions/node/v4.5.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/benjipott/Documents/projects/afrostream/videojs-comments/node_modules/.bin:/Users/benjipott/.nvm/versions/node/v4.5.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/benjipott/Documents/projects/afrostream/videojs-comments/node_modules/.bin:/Users/benjipott/.nvm/versions/node/v4.5.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/benjipott/Documents/projects/afrostream/videojs-comments/node_modules/.bin:/Users/benjipott/.nvm/versions/node/v4.5.0/bin:/Users/benjipott/.nvm/versions/node/v4.5.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/benjipott/Documents/projects/afrostream/videojs-comments/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/openssl/bin:/usr/local/openssl/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/Users/benjipott/.android-sdk-macosx/platform-tools/
+10 verbose lifecycle videojs-comments@1.0.0~mkdirs: CWD: /Users/benjipott/Documents/projects/afrostream/videojs-comments
+11 silly lifecycle videojs-comments@1.0.0~mkdirs: Args: [ '-c', 'mkdir -p dist dist-test es5' ]
+12 verbose stack Error: write EPIPE
+12 verbose stack     at exports._errnoException (util.js:907:11)
+12 verbose stack     at WriteWrap.afterWrite (net.js:785:14)
+13 verbose cwd /Users/benjipott/Documents/projects/afrostream/videojs-comments
+14 error Darwin 15.5.0
+15 error argv "/Users/benjipott/.nvm/versions/node/v4.5.0/bin/node" "/Users/benjipott/.nvm/versions/node/v4.5.0/bin/npm" "run-script" "mkdirs"
+16 error node v4.5.0
+17 error npm  v3.10.7
+18 error code EPIPE
+19 error errno EPIPE
+20 error syscall write
+21 error write EPIPE
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]
