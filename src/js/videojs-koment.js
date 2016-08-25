@@ -1,21 +1,21 @@
 /**
- * ! videojs-comments - v1.0.0 - 2016-02-15
+ * ! videojs-koment - v1.0.0 - 2016-02-15
  * Copyright (c) 2015 benjipott
  * Licensed under the Apache-2.0 license.
- * @file videojs-comments.js
+ * @file videojs-koment.js
  **/
 import videojs from 'video.js'
 import xhr from 'xhr'
-import CommentsButton from './component/control-bar/track-controls/comments-button'
+import KomentButton from './component/control-bar/track-controls/koment-button'
 
 const Component = videojs.getComponent('Component')
 
-export const TRACK_ID = 'comments_track'
+export const TRACK_ID = 'koment_track'
 /**
  * Initialize the plugin.
  * @param options (optional) {object} configuration for the plugin
  */
-class Comments extends Component {
+class Koment extends Component {
     constructor (player, options) {
         super(player, options)
 
@@ -60,13 +60,13 @@ class Comments extends Component {
     }
 }
 
-Comments.prototype.options_ = {
+Koment.prototype.options_ = {
     url: 'https://afr-api-v1-staging.herokuapp.com/api/videos/c1ee3b32-0bf8-4873-b173-09dc055b7bfe/comments'
 }
 
 // register the plugin
-videojs.options.children.push('comments')
+videojs.options.children.push('koment')
 
-Component.registerComponent('Comments', Comments)
+Component.registerComponent('Koment', Koment)
 
-export default Comments
+export default Koment

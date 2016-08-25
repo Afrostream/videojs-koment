@@ -1,5 +1,5 @@
 /**
- * @file comments-button.js
+ * @file koment-button.js
  */
 import videojs from 'video.js'
 import toTitleCase from '../../../utils/to-title-case'
@@ -14,7 +14,7 @@ const ChaptersTrackMenuItem = videojs.getComponent('ChaptersTrackMenuItem')
 const Menu = videojs.getComponent('Menu')
 
 /**
- * The button component for toggling and selecting chapters
+ * The button component for toggling and selecting koment
  * Chapters act much differently than other text tracks
  * Cues are navigation vs. other tracks of alternative languages
  *
@@ -22,13 +22,13 @@ const Menu = videojs.getComponent('Menu')
  * @param {Object=} options Object of option names and values
  * @param {Function=} ready    Ready callback function
  * @extends TextTrackButton
- * @class CommentsButton
+ * @class KomentButton
  */
-class CommentsButton extends TextTrackButton {
+class KomentButton extends TextTrackButton {
 
     constructor (player, options, ready) {
         super(player, options, ready)
-        this.el_.setAttribute('aria-label', 'Comments Menu')
+        this.el_.setAttribute('aria-label', 'Koment Menu')
     }
 
     /**
@@ -38,7 +38,7 @@ class CommentsButton extends TextTrackButton {
      * @method buildCSSClass
      */
     buildCSSClass () {
-        return `vjs-chapters-button ${super.buildCSSClass()}`
+        return `vjs-koment-button ${super.buildCSSClass()}`
     }
 
     /**
@@ -74,16 +74,16 @@ class CommentsButton extends TextTrackButton {
      */
     createMenu () {
         const tracks = this.player_.textTracks() || []
-        let chaptersTrack
+        let komentTrack
         let items = this.items || []
 
         for (let i = tracks.length - 1; i >= 0; i--) {
 
-            // We will always choose the last track as our chaptersTrack
+            // We will always choose the last track as our komentTrack
             const track = tracks[i]
 
             if (track.kind === this.kind_) {
-                chaptersTrack = track
+                komentTrack = track
 
                 break
             }
@@ -105,28 +105,28 @@ class CommentsButton extends TextTrackButton {
             // We will empty out the menu children each time because we want a
             // fresh new menu child list each time
             items.forEach(item => menu.removeChild(item))
-            // Empty out the CommentsButton menu items because we no longer need them
+            // Empty out the KomentButton menu items because we no longer need them
             items = []
         }
 
-        if (chaptersTrack && (chaptersTrack.cues === null || chaptersTrack.cues === undefined)) {
-            chaptersTrack.mode = 'hidden'
+        if (komentTrack && (komentTrack.cues === null || komentTrack.cues === undefined)) {
+            komentTrack.mode = 'hidden'
 
-            const remoteTextTrackEl = this.player_.remoteTextTrackEls().getTrackElementByTrack_(chaptersTrack)
+            const remoteTextTrackEl = this.player_.remoteTextTrackEls().getTrackElementByTrack_(komentTrack)
 
             if (remoteTextTrackEl) {
                 remoteTextTrackEl.addEventListener('load', (event) => this.update())
             }
         }
 
-        if (chaptersTrack && chaptersTrack.cues && chaptersTrack.cues.length > 0) {
-            const cues = chaptersTrack.cues
+        if (komentTrack && komentTrack.cues && komentTrack.cues.length > 0) {
+            const cues = komentTrack.cues
 
             for (let i = 0, l = cues.length; i < l; i++) {
                 const cue = cues[i]
                 const mi = new ChaptersTrackMenuItem(this.player_, {
                     cue,
-                    track: chaptersTrack
+                    track: komentTrack
                 })
 
                 items.push(mi)
@@ -144,10 +144,10 @@ class CommentsButton extends TextTrackButton {
     }
 }
 
-CommentsButton.prototype.kind_ = 'metadata'
-CommentsButton.prototype.controlText_ = 'Comments'
+KomentButton.prototype.kind_ = 'metadata'
+KomentButton.prototype.controlText_ = 'Koment'
 
-ControlBar.prototype.options_.children.push('commentsButton')
+ControlBar.prototype.options_.children.push('komentButton')
 
-Component.registerComponent('CommentsButton', CommentsButton)
-export default CommentsButton
+Component.registerComponent('KomentButton', KomentButton)
+export default KomentButton

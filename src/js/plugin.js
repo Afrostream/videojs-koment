@@ -1,5 +1,5 @@
 import videojs from 'video.js'
-import comments from './videojs-comments'
+import koment from './videojs-koment'
 
 /**
  * The video.js playlist plugin. Invokes the playlist-maker to create a
@@ -8,9 +8,9 @@ import comments from './videojs-comments'
  * @param {Array} list
  */
 const plugin = function (options) {
-    comments(this, options)
+    koment(this, options)
 }
 
-videojs.plugin('comments', plugin)
+videojs.plugin('koment', plugin)
 
 export default plugin

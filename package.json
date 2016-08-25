@@ -1,7 +1,7 @@
 {
   "name": "videojs-koment",
   "version": "1.0.0",
-  "description": "koment plugin for videojs",
+  "description": "Koment.io plugin for videojs",
   "main": "es5/plugin.js",
   "scripts": {
     "prebuild": "npm run clean",
