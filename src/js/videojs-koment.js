@@ -7,10 +7,13 @@
 import videojs from 'video.js'
 import xhr from 'xhr'
 import KomentButton from './component/control-bar/track-controls/koment-button'
+import KomentNewButton from './component/control-bar/track-controls/koment-new-button'
+import KomentTrackDisplay from './tracks/koment-track-display'
 
 const Component = videojs.getComponent('Component')
 
 export const TRACK_ID = 'koment_track'
+export const COMMENT_SHOW_TIME = 5
 /**
  * Initialize the plugin.
  * @param options (optional) {object} configuration for the plugin
@@ -20,15 +23,16 @@ class Koment extends Component {
         super(player, options)
 
         const defaults = {
-            label: 'English',
-            language: 'en'
+            label: 'Koment',
+            language: 'fr'
         }
 
         this.text_track = videojs.mergeOptions(defaults, options, {
             default: true,
-            kind: 'metadata',
+            kind: this.kind_,
             id: TRACK_ID,
-            cues: []
+            cues: [],
+            mode: 'showing'
         })
 
         let data = {
@@ -38,34 +42,55 @@ class Koment extends Component {
             headers: {
                 'Content-Type': 'application/json'
             }
-        };
+        }
 
         xhr(data, (err, res) => {
             if (err) {
-                throw new Error(err.message);
+                throw new Error(err.message)
             }
-
-            const addedTrack = player.addRemoteTextTrack(this.text_track).track
+            //const addedTrack = player.addRemoteTextTrack(this.text_track).track
+            const addedTrack = player.addTextTrack(this.text_track.kind, this.text_track.label, this.text_track.language)
+            addedTrack.default = true
 
             const listCues = res.body || []
-            let i = 0
             listCues.forEach((cue) => {
-                cue.timecode = i++
-                addedTrack.addCue(new window.VTTCue(cue.timecode, cue.timecode + 1, cue.text))
+                addedTrack.addCue(new VTTCue(cue.timecode, cue.timecode + COMMENT_SHOW_TIME, cue.text))
             })
 
 
         })
 
     }
+
+    /**
+     * Create the component's DOM element
+     *
+     * @return {Element}
+     * @method createEl
+     */
+    createEl () {
+        return super.createEl('div', {
+            className: 'vjs-koment-bar',
+            dir: 'ltr'
+        }, {
+            // The control bar is a group, so it can contain menuitems
+            role: 'group'
+        })
+    }
+
 }
 
+Koment.prototype.kind_ = 'metadata'
 Koment.prototype.options_ = {
-    url: 'https://afr-api-v1-staging.herokuapp.com/api/videos/c1ee3b32-0bf8-4873-b173-09dc055b7bfe/comments'
+    url: 'https://afr-api-v1-staging.herokuapp.com/api/videos/c1ee3b32-0bf8-4873-b173-09dc055b7bfe/comments',
+    children: {
+        'komentButton': {},
+        //'komentNewButton': {}
+    }
 }
 
 // register the plugin
-videojs.options.children.push('koment')
+videojs.options.children = videojs.options.children.concat(['koment', 'komentTrackDisplay'])
 
 Component.registerComponent('Koment', Koment)
 

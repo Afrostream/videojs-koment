@@ -31,7 +31,6 @@ var _utilsDom = require('../../../utils/dom');
 
 var Dom = _interopRequireWildcard(_utilsDom);
 
-var ControlBar = _videoJs2['default'].getComponent('ControlBar');
 var TextTrackButton = _videoJs2['default'].getComponent('TextTrackButton');
 var Component = _videoJs2['default'].getComponent('Component');
 var TextTrackMenuItem = _videoJs2['default'].getComponent('TextTrackMenuItem');
@@ -101,6 +100,31 @@ var KomentButton = (function (_TextTrackButton) {
         }
 
         /**
+         * Handle click on text track
+         *
+         * @method handleClick
+         */
+    }, {
+        key: 'handleClick',
+        value: function handleClick(event) {
+            var tracks = this.player_.textTracks();
+            _get(Object.getPrototypeOf(KomentButton.prototype), 'handleClick', this).call(this, event);
+
+            if (!tracks) {
+                return;
+            }
+
+            for (var i = 0; i < tracks.length; i++) {
+                var track = tracks[i];
+
+                if (track.kind !== this.kind_) {
+                    continue;
+                }
+                track.mode = this.buttonPressed_ ? 'showing' : 'hidden';
+            }
+        }
+
+        /**
          * Create menu from chapter buttons
          *
          * @return {Menu} Menu of chapter buttons
@@ -134,7 +158,7 @@ var KomentButton = (function (_TextTrackButton) {
 
                 var title = _videoJs2['default'].createEl('li', {
                     className: 'vjs-menu-title',
-                    innerHTML: (0, _utilsToTitleCase2['default'])(this.kind_),
+                    innerHTML: (0, _utilsToTitleCase2['default'])(this.controlText_),
                     tabIndex: -1
                 });
                 menu.children_.unshift(title);
@@ -173,7 +197,7 @@ var KomentButton = (function (_TextTrackButton) {
 
                     items.push(mi);
 
-                    menu.addChild(mi);
+                    //menu.addChild(mi)
                 }
             }
 
@@ -191,8 +215,6 @@ var KomentButton = (function (_TextTrackButton) {
 
 KomentButton.prototype.kind_ = 'metadata';
 KomentButton.prototype.controlText_ = 'Koment';
-
-ControlBar.prototype.options_.children.push('komentButton');
 
 Component.registerComponent('KomentButton', KomentButton);
 exports['default'] = KomentButton;

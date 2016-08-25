@@ -1,6 +1,6 @@
 import window from 'global/window';
 import QUnit from 'qunit';
-import metricsMaker from '../src/js/videojs-koment';
+import komentMaker from '../src/js/videojs-koment';
 import playerProxy from './player-proxy';
 
 QUnit.module('koment', {
@@ -16,9 +16,9 @@ QUnit.module('koment', {
 });
 
 QUnit.test(
-    'metricsMaker takes a player and returns a koment',
+    'komentMaker takes a player and returns a koment',
     function (assert) {
-        let koment = metricsMaker(playerProxy(), {});
+        let koment = komentMaker(playerProxy(), {});
 
         assert.equal(typeof koment, 'object', 'koment is an object');
     }
@@ -33,7 +33,7 @@ QUnit.test(
 
         let player = playerProxy();
 
-        let koment = metricsMaker(player, {});
+        let koment = komentMaker(player, {});
 
         player.currentSrc = function () {
             return 'http://vjs.zencdn.net/v/oceans.mp4';

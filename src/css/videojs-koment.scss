@@ -1,69 +1,54 @@
-$icon-font-family: koment;
-$icon-font-path: 'fonts' !default;
+@import "variables";
+@import "utilities";
+@import "font";
+@import "component/koment-button";
+@import "component/koment-track";
 
-@font-face {
-  font-family: $icon-font-family;
-  src: url('#{$icon-font-path}/koment.eot?#iefix') format('eot');
+.video-js .vjs-koment-bar {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 3.0em;
+  margin: 5px;
+  @include background-color-with-alpha($primary-background-color, $primary-background-transparency);
 }
 
-@font-face {
-  font-family: $icon-font-family;
-  src: url('#{$icon-font-path}/koment.eot?jbzfxp');
-  src: url('#{$icon-font-path}/koment.eot?jbzfxp#iefix') format('embedded-opentype'),
-  url('#{$icon-font-path}/koment.ttf?jbzfxp') format('truetype'),
-  url('#{$icon-font-path}/koment.woff?jbzfxp') format('woff'),
-  url('#{$icon-font-path}/koment.svg?jbzfxp#koment') format('svg');
-  font-weight: normal;
-  font-style: normal;
+// Video has started playing
+.vjs-has-started .vjs-koment-bar {
+  @include display-flex;
+  visibility: visible;
+  opacity: 1;
+
+  $trans: visibility 0.1s, opacity 0.1s; // Var needed because of comma
+  @include transition($trans);
 }
 
-// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
-$icons: (
-        koment: '\e900'
-);
+// Video has started playing AND user is inactive
+.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-koment-bar {
+  // Remain visible for screen reader and keyboard users
+  visibility: visible;
+  opacity: 0;
 
-// NOTE: This is as complex as we want to get with SCSS functionality.
-//
-// Now that we have a map of icons above, we can iterate over that map and create an icon class
-// for each icon in that list. The iterator below produces CSS classes like this:
-//
-// .vjs-icon-play {
-//   font-family: VideoJS;
-//   font-weight: normal;
-//   font-style: normal;
-// }
-// .vjs-icon-play:before { content: "\25b6"; }
-//
-// We can then use @extend in the codebase when we need to add an icon to a class. @extend builds up
-// the selectors for you so you can avoid duplication. This is generally a bad idea, but since each
-// icon should only be extended one or two other places, we'll roll with it.
-@each $name, $content in $icons {
-  .vjs-icon-#{$name} {
-    font-family: $icon-font-family;
-    font-weight: normal;
-    font-style: normal;
+  $trans: visibility 1.0s, opacity 1.0s;
+  @include transition($trans);
 
-    &:before {
-      content: $content;
-    }
-  }
 }
 
-.video-js .vjs-koment-button {
-  cursor: pointer;
+.vjs-controls-disabled .vjs-koment-bar,
+.vjs-using-native-controls .vjs-koment-bar,
+.vjs-error .vjs-koment-bar {
+  // !important is ok in this context.
+  display: none !important;
+}
 
-  font-size: 0.7em;
+// Don't hide the control bar if it's audio
+.vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-koment-bar {
+  opacity: 1;
+  visibility: visible;
+}
 
-  @extend .vjs-icon-koment;
-
-  &:before {
-    line-height: 2.3;
-  }
-
-  &.connected {
-    color: #66A8CC;
-  }
-  &.error {
-    color: #c70000;
-  }
+// IE 8 + 9 Support
+.vjs-has-started.vjs-no-flex .vjs-koment-bar {
+  display: table;
 }

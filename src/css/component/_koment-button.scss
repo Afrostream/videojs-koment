@@ -1,0 +1,23 @@
+
+.video-js .vjs-koment-button {
+  cursor: pointer;
+
+  font-size: 0.7em;
+
+  @extend .vjs-icon-koment;
+
+  &:before {
+    line-height: 2.3;
+  }
+
+  &.connected {
+    color: #66A8CC;
+  }
+  &.error {
+    color: #c70000;
+  }
+}
+
+.vjs-koment-new-button {
+  @extend .vjs-icon-koment-new;
+}

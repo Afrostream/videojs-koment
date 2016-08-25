@@ -12,15 +12,7 @@ const proxy = (props) => {
         removeRemoteTextTrack: Function.prototype,
         remoteTextTracks: Function.prototype,
         currentSrc: Function.prototype,
-        koment: {
-            'option': true,
-            'user_id': 666,
-            'method': 'POST',
-            'responseType': 'json',
-            'timeout': 1000,
-            'url': '//stats.afrostream.tv/api/v1/events',
-            'trackEvents': []
-        }
+        koment: {}
     }, props);
 
     player.constructor = videojs.getComponent('Player');

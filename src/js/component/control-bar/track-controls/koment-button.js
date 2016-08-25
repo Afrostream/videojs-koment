@@ -6,7 +6,6 @@ import toTitleCase from '../../../utils/to-title-case'
 import * as Dom from '../../../utils/dom'
 
 
-const ControlBar = videojs.getComponent('ControlBar')
 const TextTrackButton = videojs.getComponent('TextTrackButton')
 const Component = videojs.getComponent('Component')
 const TextTrackMenuItem = videojs.getComponent('TextTrackMenuItem')
@@ -67,6 +66,29 @@ class KomentButton extends TextTrackButton {
     }
 
     /**
+     * Handle click on text track
+     *
+     * @method handleClick
+     */
+    handleClick (event) {
+        const tracks = this.player_.textTracks()
+        super.handleClick(event)
+
+        if (!tracks) {
+            return
+        }
+
+        for (let i = 0; i < tracks.length; i++) {
+            const track = tracks[i]
+
+            if (track.kind !== this.kind_) {
+                continue
+            }
+            track.mode = this.buttonPressed_ ? 'showing' : 'hidden'
+        }
+    }
+
+    /**
      * Create menu from chapter buttons
      *
      * @return {Menu} Menu of chapter buttons
@@ -96,7 +118,7 @@ class KomentButton extends TextTrackButton {
 
             const title = videojs.createEl('li', {
                 className: 'vjs-menu-title',
-                innerHTML: toTitleCase(this.kind_),
+                innerHTML: toTitleCase(this.controlText_),
                 tabIndex: -1
             })
             menu.children_.unshift(title)
@@ -131,7 +153,7 @@ class KomentButton extends TextTrackButton {
 
                 items.push(mi)
 
-                menu.addChild(mi)
+                //menu.addChild(mi)
             }
         }
 
@@ -146,8 +168,6 @@ class KomentButton extends TextTrackButton {
 
 KomentButton.prototype.kind_ = 'metadata'
 KomentButton.prototype.controlText_ = 'Koment'
-
-ControlBar.prototype.options_.children.push('komentButton')
 
 Component.registerComponent('KomentButton', KomentButton)
 export default KomentButton
