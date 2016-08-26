@@ -491,14 +491,14 @@ var KomentTrackDisplay = (function (_Component) {
         key: 'handleTracksChange',
         value: function handleTracksChange() {
             var tracks = this.player().textTracks();
-            var disabled = false;
+            var disabled = true;
 
             // Check whether a track of a different kind is showing
             for (var i = 0, l = tracks.length; i < l; i++) {
                 var track = tracks[i];
 
-                if (track.kind !== this.kind_ && track.mode === 'showing') {
-                    disabled = true;
+                if (track.kind === this.kind_ && track.mode === 'showing') {
+                    disabled = false;
                     break;
                 }
             }

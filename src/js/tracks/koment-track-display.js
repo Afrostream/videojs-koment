@@ -155,14 +155,14 @@ class KomentTrackDisplay extends Component {
      */
     handleTracksChange () {
         const tracks = this.player().textTracks()
-        let disabled = false
+        let disabled = true
 
         // Check whether a track of a different kind is showing
         for (let i = 0, l = tracks.length; i < l; i++) {
             const track = tracks[i]
 
-            if (track.kind !== this.kind_ && track.mode === 'showing') {
-                disabled = true
+            if (track.kind === this.kind_ && track.mode === 'showing') {
+                disabled = false
                 break
             }
         }
