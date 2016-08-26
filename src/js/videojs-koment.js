@@ -54,7 +54,7 @@ class Koment extends Component {
 
             const listCues = res.body || []
             listCues.forEach((cue) => {
-                addedTrack.addCue(new VTTCue(cue.timecode, cue.timecode + COMMENT_SHOW_TIME, cue.text))
+                addedTrack.addCue(new VTTCue(cue.timecode, cue.timecode + COMMENT_SHOW_TIME, '<c.koment>' + cue.text + '</c.koment>'))
             })
 
 
